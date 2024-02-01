@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>webcam</title>
+    <style>
+
+        section.col-sm{
+          background-color:black;
+          width: 500px;
+          height: 325px;
+          border-radius: 35px;
+          object-fit: contain;
+          margin-top: 20px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 20px;
+          align:center;
+          padding-top: 85px;
+        }
+         #image_container {
+            width:100%;
+            height: 100%px;
+            border:0.5px solid gray
+            object-fit: contain;
+            align:center;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/home"><img src="../static/images/LOGO BARU.png" width="120" height="40"
+                                                      class="d-block my-1" alt="..."></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
+                    aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2"
+                 aria-labelledby="offcanvasNavbar2Label">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/VideoPage">Video</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/GambarPage">Gambar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/WebcamPage">Webcam</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col text-center">
+            <section class="col-sm" id="col-sm">
+                <img id="image_container" src="../static/images/LOGO BARU.png" alt="webcam on">
+                <div class="spinner-border text-primary col-sm" role="status" id="loader" style="display : none">
+                    <span class="sr-only"></span>
+                </div>
+            </section>
+            <br>
+            <br>
+            <button type="button" class="btn btn-outline-primary" onclick="webcam_on()" id="buttonon">ON</button>
+            <button type="button" class="btn btn-outline-danger" onclick="webcam_off()" id="buttonoff">OFF</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function webcam_on(){
+        document.getElementById("loader").style.display="inline-block";
+        var img = document.getElementById("image_container");
+        img.setAttribute("src", "{{ url_for('webapp') }}");
+        img.onload = function(){
+            document.getElementById("loader").style.display="none";
+        };
+        document.getElementById("col-sm").style.paddingTop = "0px";
+    }
+    function webcam_off(){
+        document.getElementById("image_container").setAttribute("src", "../static/images/LOGO BARU.png");
+        document.getElementById("col-sm").style.paddingTop = "85px";
+    }
+</script>
+</body>
+</html>
